@@ -1,0 +1,70 @@
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <span> Teste SPA</span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+  <div>
+    <app-alunos [valorInicial]="valor"></app-alunos>
+
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button (click)="mudarValor()">Mudar Valor</button>
+      <button mat-raised-button (click)="reiniciarValor()">
+        Reiniciar Valor
+      </button>
+      <button mat-raised-button (click)="exibirTabela()">Exibir Tabela</button>
+    </div>
+  </div>
+
+  <mat-table
+    [dataSource]="listaAlunos"
+    class="tabela mat-elevation-z8"
+    *ngIf="exibeTabela"
+  >
+    <ng-container matColumnDef="Nome">
+      <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+      <mat-cell *matCellDef="let aluno">{{ aluno.nome }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Idade">
+      <mat-header-cell *matHeaderCellDef>Idade</mat-header-cell>
+      <mat-cell *matCellDef="let aluno">{{ aluno.idade }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="E-mail">
+      <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+      <mat-cell *matCellDef="let aluno">{{ aluno.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Curso">
+      <mat-header-cell *matHeaderCellDef>Curso</mat-header-cell>
+      <mat-cell *matCellDef="let aluno">{{ aluno.curso }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <app-professores></app-professores>
+</div>
